@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Statistik Kabupaten Ngawi</title>
+
+    <style>
+        body {
+            background-color: #eeeeee;
+            font-family: "Times New Roman", serif;
+            margin: 10px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            background-color: white;
+            border: 1px solid gray;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        /* HEADER */
+        .header {
+            background-color: #00eeee;
+            border: 4px double gray;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .logo {
+            width: 120px;
+            text-align: center;
+        }
+
+        .logo img {
+            width: 100px;
+            height: auto;
+        }
+
+        .judul {
+            flex: 1;
+            text-align: center;
+        }
+
+        .judul h1 {
+            font-size: 38px;
+            margin: 10px;
+        }
+
+        .judul h2 {
+            font-size: 28px;
+            margin: 15px;
+        }
+
+        /* KONTEN */
+        .content {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .profil {
+            width: 35%;
+            background-color: #ddffff;
+            border: 4px double gray;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .profil h2 {
+            text-align: center;
+            font-size: 25px;
+        }
+
+        .profil p {
+            text-align: justify;
+            line-height: 1.4;
+        }
+
+        .tabel {
+            width: 65%;
+            border: 4px double gray;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .judul-tabel {
+            background-color: #00eeee;
+            text-align: center;
+            font-size: 19px;
+            font-weight: bold;
+            padding: 12px;
+            border-bottom: 2px solid gray;
+        }
+
+        /* RINGKASAN */
+        .ringkasan {
+            display: flex;
+            text-align: center;
+            background-color: #ddffff;
+        }
+
+        .ringkasan div {
+            flex: 1;
+            padding: 10px 3px;
+            border: 1px solid gray;
+        }
+
+        .ringkasan b {
+            display: block;
+            margin-top: 5px;
+            font-size: 18px;
+        }
+
+        /* TABEL DATA */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 3px;
+        }
+
+        th, td {
+            border: 1px solid gray;
+            padding: 10px 7px;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f5ffff;
+            text-align: center;
+        }
+
+        td {
+            background-color: #00eeee;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #ddffff;
+        }
+
+        .angka {
+            text-align: right;
+        }
+
+        .bar {
+            height: 6px;
+            background-color: #b5cccc;
+            margin-top: 4px;
+        }
+
+        .isi-bar {
+            height: 6px;
+            background-color: #087a8a;
+        }
+
+        .total td {
+            background-color: #b9ffff !important;
+            font-weight: bold;
+        }
+
+        .pencarian {
+            padding: 8px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .pencarian input {
+            flex: 1;
+            min-width: 0;
+            padding: 8px;
+        }
+
+        .pencarian button {
+            background-color: #00cccc;
+            border: 1px solid gray;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+        .footer {
+            background-color: #00eeee;
+            border: 4px double gray;
+            text-align: center;
+            margin-top: 10px;
+            padding: 8px;
+        }
+
+        .footer h2 {
+            margin: 0 0 5px;
+            font-size: 22px;
+        }
+
+        .footer p {
+            margin: 5px;
+        }
+
+        a {
+            color: #003366;
+        }
+
+        /* TAMPILAN HP */
+        @media screen and (max-width: 700px) {
+            .header {
+                min-height: 110px;
+                padding: 5px;
+            }
+
+            .logo {
+                width: 75px;
+            }
+
+            .logo img {
+                width: 65px;
+            }
+
+            .judul h1 {
+                font-size: 23px;
+            }
+
+            .judul h2 {
+                font-size: 20px;
+            }
+
+            .content {
+                flex-direction: column;
+            }
+
+            .profil, .tabel {
+                width: 100%;
+            }
+
+            .ringkasan {
+                flex-direction: column;
+            }
+
+            .scroll-tabel {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+
+        <div class="logo">
+            <img
+                src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Lambang_Kabupaten_Ngawi_%28svg%29.svg/120px-Lambang_Kabupaten_Ngawi_%28svg%29.svg.png"
+                alt="Logo Kabupaten Ngawi">
+        </div>
+
+        <div class="judul">
+            <h1>Sistem Informasi Statistik</h1>
+            <h2>Kabupaten Ngawi</h2>
+        </div>
+
+    </div>
+
+    <!-- KONTEN UTAMA -->
+    <div class="content">
+
+        <!-- PROFIL KABUPATEN -->
+        <div class="profil">
+        <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Indonesia_Ngawi_Regency_location_map.svg"
+            alt="Peta lokasi Kabupaten Ngawi di Indonesia">
+
+            <h2>Kabupaten Ngawi</h2>
+
+            <p>
+                Kabupaten Ngawi terletak di bagian barat Provinsi Jawa Timur
+                dan berbatasan langsung dengan Provinsi Jawa Tengah.
+                Wilayah ini memiliki bentang alam berupa dataran serta
+                kawasan perbukitan di sekitar lereng Gunung Lawu.
+            </p>
+
+            <p>
+                Kabupaten Ngawi terdiri atas 19 kecamatan.
+                Halaman ini menyajikan informasi statistik jumlah penduduk
+                menurut kecamatan tahun 2025 untuk memberikan gambaran
+                persebaran penduduk di wilayah Kabupaten Ngawi.
+            </p>
+
+            <p><b>Informasi Statistik:</b></p>
+
+            <ul>
+                <li>Total penduduk: 911.093 jiwa</li>
+                <li>Jumlah kecamatan: 19</li>
+                <li>Penduduk terbanyak: Kecamatan Paron</li>
+                <li>Penduduk paling sedikit: Kecamatan Kasreman</li>
+            </ul>
+
+        </div>
+
+        <!-- TABEL STATISTIK -->
+        <div class="tabel">
+
+            <div class="judul-tabel">
+                Jumlah Penduduk Menurut Kecamatan
+            </div>
+
+            <div class="ringkasan">
+
+                <div>
+                    Total Penduduk
+                    <b>911.093</b>
+                </div>
+
+                <div>
+                    Jumlah Kecamatan
+                    <b>19</b>
+                </div>
+
+                <div>
+                    Rata-rata Penduduk
+                    <b>47.952</b>
+                </div>
+
+            </div>
+
+            <!-- PENCARIAN -->
+            <div class="pencarian">
+                <input
+                    type="text"
+                    id="cari"
+                    placeholder="Cari nama kecamatan..."
+                    onkeyup="cariKecamatan()">
+
+                <button onclick="window.print()">
+                    Cetak
+                </button>
+            </div>
+
+            <!-- TABEL DATA -->
+            <div class="scroll-tabel">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Kecamatan</th>
+                            <th>Jumlah Penduduk (Jiwa)</th>
+                            <th>Persentase</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="data-penduduk">
+                    </tbody>
+
+                    <tfoot>
+                        <tr class="total">
+                            <td>Kabupaten Ngawi</td>
+                            <td class="angka">911.093</td>
+                            <td class="angka">100,00%</td>
+                        </tr>
+                    </tfoot>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+
+        <h2>Pemerintah Kabupaten Ngawi</h2>
+
+        <p>
+            Data Statistik Kependudukan Kabupaten Ngawi Tahun 2025
+        </p>
+
+        <p>
+            Situs Resmi:
+            <a href="https://ngawikab.go.id/" target="_blank">
+                Pemerintah Kabupaten Ngawi
+            </a>
+            |
+            <a href="https://ngawikab.bps.go.id/" target="_blank">
+                BPS Kabupaten Ngawi
+            </a>
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+    // DATA PENDUDUK BERDASARKAN FOTO
+    const penduduk = [
+        ["Sine", 47329],
+        ["Ngrambe", 44705],
+        ["Jogorogo", 45275],
+        ["Kendal", 53810],
+        ["Geneng", 52944],
+        ["Gerih", 38405],
+        ["Kwadungan", 27305],
+        ["Pangkur", 28254],
+        ["Karangjati", 48283],
+        ["Bringin", 32277],
+        ["Padas", 35430],
+        ["Kasreman", 25684],
+        ["Ngawi", 86092],
+        ["Paron", 96471],
+        ["Kedunggalar", 74130],
+        ["Pitu", 31467],
+        ["Widodaren", 73920],
+        ["Mantingan", 38362],
+        ["Karanganyar", 30950]
+    ];
+
+    const total = 911093;
+
+    // FORMAT ANGKA INDONESIA
+    function formatAngka(angka) {
+        return angka.toLocaleString("id-ID");
+    }
+
+    // FORMAT PERSENTASE
+    function formatPersen(angka) {
+        return angka.toLocaleString("id-ID", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }) + "%";
+    }
+
+    // MENAMPILKAN DATA KE TABEL
+    function tampilkanData(data) {
+
+        const tbody = document.getElementById("data-penduduk");
+
+        tbody.innerHTML = "";
+
+        data.forEach(function(item) {
+
+            const nama = item[0];
+            const jumlah = item[1];
+            const persentase = (jumlah / total) * 100;
+            const lebarBar = (jumlah / 96471) * 100;
+
+            const baris = document.createElement("tr");
+
+            baris.innerHTML = `
+                <td>${nama}</td>
+
+                <td class="angka">
+                    ${formatAngka(jumlah)}
+                </td>
+
+                <td class="angka">
+                    ${formatPersen(persentase)}
+
+                    <div class="bar">
+                        <div class="isi-bar"
+                             style="width: ${lebarBar}%">
+                        </div>
+                    </div>
+                </td>
+            `;
+
+            tbody.appendChild(baris);
+
+        });
+
+        if (data.length === 0) {
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="3" style="text-align:center">
+                        Kecamatan tidak ditemukan
+                    </td>
+                </tr>
+            `;
+
+        }
+    }
+
+    // FITUR PENCARIAN KECAMATAN
+    function cariKecamatan() {
+
+        const kataKunci = document
+            .getElementById("cari")
+            .value
+            .toLowerCase();
+
+        const hasil = penduduk.filter(function(item) {
+
+            return item[0]
+                .toLowerCase()
+                .includes(kataKunci);
+
+        });
+
+        tampilkanData(hasil);
+
+    }
+
+    // MENAMPILKAN DATA SAAT HALAMAN DIBUKA
+    tampilkanData(penduduk);
+
+</script>
+
+</body>
+</html>
